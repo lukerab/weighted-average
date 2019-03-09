@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8"</meta>
+  <title>Ranking Residencies</title>
+</head>
+
+<body>
+  <h1>Ranking Residencies</h1>
+  <h2>Select the ranking categories below, determine how important that category is, and score that category for the specific residency.</h2>
+
+  <div class="form">
+    <form method="POST">
+
+      <div><label for="cat0">1) What is one thing about residency programs that is important to you?</label>
+      <input list="cats" id="cat0" name="cat0" placeholder="Select or Type your own"required>
+          <datalist id="cats">
+            <option value="Quality of Faculty"></option>
+            <option value="Location"></option>
+            <option value="Prestige"></option>
+            <option value="Quality of Residents"></option>
+            <option value="Learning Experiences"></option>
+            <option value="Length of Program"></option>
+            <option value="Quality of Rotations"></option>
+          </datalist><br><br>
+          <label for="weight0">How important is this category for you? (5 most important - 1 least important)</label>
+          <input type="number" min="1" max="5" id="weight0" name="weight0" placeholder="Weight for category 1" required><br><br>
+
+      <label for="score0">What is the score you would give this category? (1-5, 1 = worst, 5 = best)</label>
+      <input type="number" min="1" max="5" id="score0" name="score0" placeholder="Score for category 1" required><br><br><br></div>
+
+      <div><label for="cat1">2) What is another thing about residency programs that is important to you?</label>
+      <input list="cats" id="cat1" name="cat1" placeholder="Select or Type your own"required>
+          <datalist id="cats">
+            <option value="Quality of Faculty"></option>
+            <option value="Location"></option>
+            <option value="Prestige"></option>
+            <option value="Quality of Residents"></option>
+            <option value="Learning Experiences"></option>
+            <option value="Length of Program"></option>
+            <option value="Quality of Rotations"></option>
+          </datalist><br><br>
+          <label for="weight1">How important is this category for you? (5 most important - 1 least important)</label>
+          <input type="number" min="1" max="5" id="weight1" name="weight1" placeholder="Weight for category 2" required><br><br>
+
+      <label for="score1">What is the score you would give this category? (1-5, 1 = worst, 5 = best)</label>
+      <input type="number" min="1" max="5" id="score1" name="score1" placeholder="Score for category 2" required><br><br><br></div>
+
+      <div><label for="cat2">3) What is another thing about residency programs that is important to you?</label>
+      <input list="cats" id="cat2" name="cat2" placeholder="Select or Type your own"required>
+          <datalist id="cats">
+            <option value="Quality of Faculty"></option>
+            <option value="Location"></option>
+            <option value="Prestige"></option>
+            <option value="Quality of Residents"></option>
+            <option value="Learning Experiences"></option>
+            <option value="Length of Program"></option>
+            <option value="Quality of Rotations"></option>
+          </datalist><br><br>
+          <label for="weight2">How important is this category for you? (5 most important - 1 least important)</label>
+          <input type="number" min="1" max="5" id="weight2" name="weight2" placeholder="Weight for category 3" required><br><br>
+
+      <label for="score2">What is the score you would give this category? (1-5, 1 = worst, 5 = best)</label>
+      <input type="number" min="1" max="5" id="score2" name="score2" placeholder="Score for category 3" required><br><br><br></div>
+
+      <div><label for="cat3">4) What is another thing about residency programs that is important to you?</label>
+      <input list="cats" id="cat3" name="cat3" placeholder="Select or Type your own">
+          <datalist id="cats">
+            <option value="Quality of Faculty"></option>
+            <option value="Location"></option>
+            <option value="Prestige"></option>
+            <option value="Quality of Residents"></option>
+            <option value="Learning Experiences"></option>
+            <option value="Length of Program"></option>
+            <option value="Quality of Rotations"></option>
+         </datalist><br><br>
+         <label for="weight3">How important is this category for you? (5 most important - 1 least important)</label>
+         <input type="number" min="1" max="5" id="weight3" name="weight3" placeholder="Weight for category 4" required><br><br>
+
+      <label for="score3">What is the score you would give this category? (1-5, 1 = worst, 5 = best)</label>
+      <input type="number" min="1" max="5" id="score3" name="score3" placeholder="Score for category 4" required><br><br><br></div>
+
+      <div><label for="cat4">5) What is another thing about residency programs that is important to you?</label>
+      <input list="cats" id="cat4" name="cat4" placeholder="Select or Type your own">
+          <datalist id="cats">
+            <option value="Quality of Faculty"></option>
+            <option value="Location"></option>
+            <option value="Prestige"></option>
+            <option value="Quality of Residents"></option>
+            <option value="Learning Experiences"></option>
+            <option value="Length of Program"></option>
+            <option value="Quality of Rotations"></option>
+          </datalist><br><br>
+          <label for="weight4">How important is this category for you? (5 most important - 1 least important)</label>
+          <input type="number" min="1" max="5" id="weight4" name="weight4" placeholder="Weight for category 5" required><br><br>
+
+      <label for="score4">What is the score you would give this category? (1-5, 1 = worst, 5 = best)</label>
+      <input type="number" min="1" max="5" id="score4" name="score4" placeholder="Score for category 5" required><br><br><br></div>
+  </div>
+<!-- above is for front end only. Form does not post anywhere-->
+
+  <button type="button" onclick="showScore()">Calculate</button><br><br>
+
+  <p id="answer"></p>
+
+  <!--<script src="./main.js"></script>-->
+  <script>
+    function showScore() {
+      let i;
+      let score = [];
+      let weight = [];
+      let num = [];
+      let weights_total = 0;
+      let total_score = 0;
+
+//loops through categories and calculates a the numerator and denominator
+//for a weighted average
+      for(i=0;i<5;i++){
+        score.push(Number(document.getElementById(`score${i}`).value));
+        weight.push(Number(document.getElementById(`weight${i}`).value));
+        num.push(score[i]*weight[i]);
+        weights_total += weight[i];
+        total_score += num[i];
+      };
+
+//calculates the weighted average using totals from for loop
+      let final_score = total_score/weights_total;
+
+//shows the final weighted average at the bottom of the page
+    document.getElementById("answer").innerHTML = final_score;
+  };
+
+//original code that was refractored above
+
+      /*let score1 = Number(document.getElementById("score1").value);
+      let score1 = Number(document.getElementById("score1").value);
+      let score2 = Number(document.getElementById("score2").value);
+      let score3 = Number(document.getElementById("score3").value);
+      let score4 = Number(document.getElementById("score4").value);
+
+      let weight1 = Number(document.getElementById("weight1").value);
+      let weight1 = Number(document.getElementById("weight1").value);
+      let weight2 = Number(document.getElementById("weight2").value);
+      let weight3 = Number(document.getElementById("weight3").value);
+      let weight4 = Number(document.getElementById("weight4").value);
+
+      let weights_total = weight1+weight1+weight2+weight3+weight4;
+
+      let num1 = score1*weight1;
+      let num2 = score1*weight1;
+      let num3 = score2*weight2;
+      let num4 = score3*weight3;
+      let num5 = score4*weight4;
+
+      let total_score = num1+num2+num3+num4+num5;*/
+  </script>
+</body>
+
+</html>
